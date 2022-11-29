@@ -17,7 +17,7 @@ export default function Day({ day, rowIdx }) {
       (evt) => dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
     );
     setDayEvents(events);
-    // console.log(events);
+    console.log(day.format("DD-MM"), dayjs().format("DD-MM"));
   }, [filteredEvents, day]);
 
   function getCurrentDayClass() {
@@ -51,7 +51,9 @@ export default function Day({ day, rowIdx }) {
             key={idx}
             onClick={() => setSelectedEvent(evt)}
             className={`bg-${evt.label} ${
-              day.format("DD") < monthIndex ? "line-through " : "underline"
+              day.format("DD") < dayjs().format("DD")
+                ? "line-through"
+                : "underline"
             } p-1 mr-3 text-white text-sm rounded mb-1 truncate`}
           >
             {evt.title}
